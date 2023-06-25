@@ -1,16 +1,6 @@
-import express from "express";
-require("dotenv").config();
+const express = require('./config/express');
+const {logger} = require('./config/winston');
 
-// 서버만들기
-const app = express();
-
-// 서버 실행
-app.listen(process.env.PORT, () => {
-  console.log(`SERVER IS RUNNING ON PORT ${process.env.PORT}`);
-});
-
-// /로 접속했을 때
-app.get("/", (req, res) => {
-  console.log("GET /");
-  return res.send("Hello World!");
-});
+const port = 3000;
+express().listen(port);
+logger.info(`${process.env.NODE_ENV} - API Server Start At Port ${port}`);
